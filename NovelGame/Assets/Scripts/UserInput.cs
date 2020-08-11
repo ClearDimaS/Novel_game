@@ -77,19 +77,12 @@ public class UserInput : MonoBehaviour
 
     private void updEmotions()
     {
+        if (currentScene == Constants.SCENE2) { bundleController.loadBundle("", webInfo, dialogue.elements.speaker);  }
+
         if (currentScene == Constants.SCENE1)
-        {
             currentScene = Constants.SCENE2;
-        }
-        else if (currentScene == Constants.SCENE2)
-        {
+        else
             currentScene = Constants.SCENE1;
 
-            bundleController.loadBundle("", webInfo, dialogue.elements.speaker);
-        }
-        else
-        {
-            currentScene = Constants.SCENE1;
-        }
     }
 }

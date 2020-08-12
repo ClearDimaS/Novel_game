@@ -2015,7 +2015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnsUIController: {fileID: 2032385061}
-  webInfo: {fileID: 0}
+  imageUpd: {fileID: 1341179349}
 --- !u!114 &2032385059
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,13 +19,13 @@ public class ImageUpd : MonoBehaviour
 
     private void OnImageLoad(Texture2D myTexture)
     {
-        if (true) // no errors
+        if (myTexture != null) // no errors
         {
             ImageToUpd.sprite = Sprite.Create(myTexture, new Rect(0, 0, myTexture.height, myTexture.width), Vector2.zero);
         }
         else
         {
-            Debug.Log("Error OnImageLoad");
+            Debug.Log("Error Getting Texture");
         }
 
         EventManager.StopListening<Texture2D>("OnImageLoad", OnImageLoad);

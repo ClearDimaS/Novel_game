@@ -16,6 +16,7 @@ public class ApiHandler : MonoBehaviour
 
     IEnumerator GetRequest(string eventName, string uri)
     {
+        Texture2D myTexture = null;
         using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(uri))
         {
             // Request and wait for the desired page.
@@ -30,10 +31,10 @@ public class ApiHandler : MonoBehaviour
             }
             else
             {
-                Texture2D myTexture = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
-                EventManager.TriggerEvent(eventName, myTexture);
+                myTexture = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
                 Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
             }
+            EventManager.TriggerEvent(eventName, myTexture);
         }
     }
 }

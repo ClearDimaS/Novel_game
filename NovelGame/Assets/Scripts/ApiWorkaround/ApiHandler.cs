@@ -2,18 +2,20 @@
 using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.UI;
-//using Assets;
 
-public class WebInfo : MonoBehaviour
+public class ApiHandler : MonoBehaviour
 {
-    public void UpdImage(Image _speakerImg)
+    /// <summary>
+    /// DownlaodsImageFromUri
+    /// </summary>
+    /// <param name="eventName"></param> The event that will be called after the load is complete
+    public void GetImgFromUri(string eventName, string uri)
     {
-        StartCoroutine(GetRequest("https://picsum.photos/200", _speakerImg));
+        StartCoroutine(GetRequest(eventName, uri));
     }
 
-    IEnumerator GetRequest(string uri, Image _speakerImg)
+    IEnumerator GetRequest(string eventName, string uri)
     {
-        Image speakerImg = _speakerImg;
         using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(uri))
         {
             // Request and wait for the desired page.
@@ -29,7 +31,7 @@ public class WebInfo : MonoBehaviour
             else
             {
                 Texture2D myTexture = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
-                speakerImg.sprite = Sprite.Create(myTexture, new Rect(0, 0, myTexture.height, myTexture.width), Vector2.zero);
+                EventManager.TriggerEvent(eventName, myTexture);
                 Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
             }
         }

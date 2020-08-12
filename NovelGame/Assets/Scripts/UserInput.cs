@@ -9,6 +9,8 @@ public class UserInput : MonoBehaviour
 {
     public BtnsUIController btnsUIController;
 
+    public ImageUpd imageUpd;
+
     DialogueSystem dialogue;
 
     TextFormating formatText;
@@ -17,15 +19,9 @@ public class UserInput : MonoBehaviour
 
     int index;
 
-    public WebInfo webInfo;
-
-    BundleController bundleController;
-
 
     private void Start()
     {
-        bundleController = new BundleController();
-
         dialogue = DialogueSystem.instance;
 
         formatText = new TextFormating();
@@ -59,25 +55,30 @@ public class UserInput : MonoBehaviour
 
     public void ChangeScene()
     {
+        updEmotions();
+
         resetScene();
     }
 
     private void resetScene()
     {
-        index = 1;
-
-        updEmotions();
-
-        dialogue.localisationSystem.Init(currentScene);
-
-        dialogue.localisationSystemPlayer.Init(currentScene + "Player");
+        resetDialogue();
 
         NextPhrase();
     }
 
+    private void resetDialogue()
+    {
+        index = 1;
+
+        dialogue.localisationSystem.Init(currentScene);
+
+        dialogue.localisationSystemPlayer.Init(currentScene + "Player");
+    }
+
     private void updEmotions()
     {
-        if (currentScene == Constants.SCENE2) { bundleController.loadBundle("", webInfo, dialogue.elements.speaker);  }
+        if (currentScene == Constants.SCENE2) { imageUpd.LoadImage(); }
 
         if (currentScene == Constants.SCENE1)
             currentScene = Constants.SCENE2;
